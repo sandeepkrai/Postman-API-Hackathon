@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:postmanapihackathon/News/NewsMain.dart';
 
 void main() {
   runApp(const MyApp());
@@ -106,8 +107,9 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>NewsMain()));
+        },
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
