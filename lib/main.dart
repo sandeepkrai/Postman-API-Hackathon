@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:postmanapihackathon/News/NewsMain.dart';
+import 'package:postmanapihackathon/Weather/Services/DataFetching.dart';
+import 'package:postmanapihackathon/Weather/Services/Location.dart';
+import 'package:postmanapihackathon/Weather/location.dart';
 import 'package:postmanapihackathon/Weather/weatherMain.dart';
 
 void main() {
@@ -17,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Weather Page'),
     );
   }
 }
@@ -68,10 +71,10 @@ class _MyHomePageState extends State<MyHomePage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: DataFetching(),
+      body: FetchScreen(),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>NewsMain()));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>LocationPage()));
         },
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
