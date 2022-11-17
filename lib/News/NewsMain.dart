@@ -22,61 +22,84 @@ class _NewsMainState extends State<NewsMain> {
       appBar: AppBar(
         title: const Text("News"),
       ),
-      body: SizedBox(
-        width: width,
-        height: height,
-        child: FutureBuilder(
-          future: _api.getNews(pageNumber: pageNumber),
-          builder: (
-            BuildContext context,
-            AsyncSnapshot<List<NewsObject>?> snapshot,
-          ) {
-            if (snapshot.hasData) {
-              List<NewsObject>? data = snapshot.data;
-              return SingleChildScrollView(
-                child: Column(
-                  children: data!
-                      .map(
-                        (e) => Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      pageNumber++;
+                    });
+                  },
+                  child: const Text("Next"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      pageNumber--;
+                    });
+                  },
+                  child: const Text("Previous"),
+                ),
+              ],
+            ),
+            FutureBuilder(
+              future: _api.getNews(pageNumber: pageNumber),
+              builder: (
+                BuildContext context,
+                AsyncSnapshot<List<NewsObject>?> snapshot,
+              ) {
+                if (snapshot.hasData) {
+                  List<NewsObject>? data = snapshot.data;
+                  return SingleChildScrollView(
+                    child: Column(
+                      children: data!
+                          .map(
+                            (e) => Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Expanded(
-                                  child: Text(
-                                    "${e.title!.trim()}\n",
-                                    // softWrap: true,
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                ),
-                                e.imageUrl == null
-                                    ? const SizedBox(
-                                        width: 100,
-                                        height: 100,
-                                      )
-                                    : Image.network(
-                                        e.imageUrl!,
-                                        fit: BoxFit.cover,
-                                        width: 100,
-                                        height: 100,
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        "${e.title!.trim()}\n",
+                                        // softWrap: true,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                        ),
                                       ),
+                                    ),
+                                    e.imageUrl == null
+                                        ? const SizedBox(
+                                            width: 100,
+                                            height: 100,
+                                          )
+                                        : Image.network(
+                                            e.imageUrl!,
+                                            fit: BoxFit.cover,
+                                            width: 100,
+                                            height: 100,
+                                          ),
+                                  ],
+                                ),
                               ],
                             ),
-                          ],
-                        ),
-                      )
-                      .toList(),
-                ),
-              );
-            } else {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          },
+                          )
+                          .toList(),
+                    ),
+                  );
+                } else {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              },
+            ),
+          ],
         ),
       ),
     );
