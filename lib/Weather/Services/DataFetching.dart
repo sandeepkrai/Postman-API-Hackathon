@@ -24,23 +24,243 @@ class _FetchScreenState extends State<FetchScreen> {
         return WeatherData.fromJson(data);
       }
   }
+  final temp= [14.5,16.9,18.9,19.5,21.0,22.3,25.1,27.2,37.2,31.2,25.6,21.3,19.3,17.7,15.5];
+
+  int ci=0;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(child: FutureBuilder<WeatherData>(
-          future: getData(),
-          builder: (context, snapshot){
-            if(snapshot.hasData){
-              return Text(snapshot.data!.weather![0].main.toString());
-            }
-            else{
-              return Text('Loading');
-            }
-          },
-        ))
-      ],
+    var height= MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
+    TextStyle titlefont= TextStyle(fontWeight: FontWeight.w600, fontSize: width*0.055);
+    TextStyle infofont= TextStyle(fontWeight: FontWeight.w400, fontSize: width*0.053,color: Colors.grey);
+
+
+
+    return Center(
+
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: height*0.03,
+          ),
+          Icon(
+            Icons.water_drop,
+            color: Colors.blue,
+            size: height*0.1,
+          ),
+
+          SizedBox(
+            height: height*0.01,
+          ),
+      Text('25.1',style: TextStyle(fontWeight: FontWeight.w400,fontSize: width*0.16),),
+      // Column(
+      //   children: [
+      //     FutureBuilder<WeatherData>(
+      //       future: getData(),
+      //       builder: (context, snapshot){
+      //         if(snapshot.hasData){
+      //           return Text(snapshot.data!.weather![0].main.toString(),
+      //             style: TextStyle(fontWeight: FontWeight.w700,fontSize: width*0.1),
+      //            );
+      //         }
+      //         else{
+      //           return Text('Loading');
+      //         }
+      //       },
+      //     )
+      //    ],
+      //   ),
+          Text('Manipal', style: TextStyle(fontSize: width*0.06,color:Colors.grey ),),
+
+          SizedBox(height: height*0.03,),
+          Align(
+            child: Padding(
+              padding:  EdgeInsets.only(left:width*0.05),
+              child: Text("Today",
+                style: TextStyle(fontSize: width*0.06,color: Colors.black54, fontWeight: FontWeight.w800),
+              ),
+            ),
+            alignment: Alignment.centerLeft,
+          ),
+          Divider(
+            thickness: height*0.001,
+            color: Colors.grey,
+          ),
+          //SizedBox(height: height*0.02),
+          Container(
+
+            height: height*0.15,
+            width: width*0.9,
+            child: ListView.builder(
+              itemCount: temp.length,
+              scrollDirection: Axis.horizontal,
+
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(right:5.0),
+                  child: Card(
+                    elevation: 05.0,
+
+                    child: Container(
+
+
+                      child: Center(
+                          child: Text(temp[index].toString(),
+                        style: TextStyle(fontWeight: FontWeight.w700, fontSize: width*0.053,color: Colors.white),
+                        )
+                      ),
+
+                      //height: height*0.13
+                      decoration: new BoxDecoration(
+                        color: concolor(temp[index]),
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+
+                      ),
+                      width: width * 0.18,
+                    ),
+                  ),
+                );
+
+              }
+
+            ),
+          ),
+          SizedBox(height: height*0.06),
+          Align(
+            child: Padding(
+              padding:  EdgeInsets.only(left:width*0.05),
+              child: Text("Additional Information",
+                style: TextStyle(fontSize: width*0.06,color: Colors.black54, fontWeight: FontWeight.w800),
+              ),
+            ),
+            alignment: Alignment.centerLeft,
+          ),
+          Divider(
+            thickness: height*0.001,
+            color: Colors.grey,
+          ),
+          SizedBox(
+            height: height*0.01,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Padding(
+                padding:  EdgeInsets.only(left:width*0.03),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+
+                  children: [
+                      Text('Visibility', style: titlefont,),
+                    SizedBox(
+                      height: height*0.01,
+                    ),
+                    Text('Pressure', style: titlefont,),
+                    SizedBox(
+                      height: height*0.01,
+                    ),
+                    Text('Min Temp', style: titlefont,)
+                  ],
+                ),
+              ),
+              Padding(
+                padding:  EdgeInsets.only(left:width*0.03),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+
+                  children: [
+                    Text('4.5 km', style: infofont,),
+                    SizedBox(
+                      height: height*0.01,
+                    ),
+                    Text('1014', style: infofont,),
+                    SizedBox(
+                      height: height*0.01,
+                    ),
+                    Text('19 ', style: infofont,)
+                  ],
+                ),
+              ),
+              Padding(
+                padding:  EdgeInsets.only(left:width*0.03),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+
+                  children: [
+                    Text('Humidity', style: titlefont,),
+                    SizedBox(
+                      height: height*0.01,
+                    ),
+                    Text('Feels Like', style: titlefont,),
+                    SizedBox(
+                      height: height*0.01,
+                    ),
+                    Text('Max Temp', style: titlefont,)
+                  ],
+                ),
+              ),
+              Padding(
+                padding:  EdgeInsets.only(left:width*0.03),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+
+                  children: [
+                    Text('93%', style: infofont,),
+                    SizedBox(
+                      height: height*0.01,
+                    ),
+                    Text('31', style: infofont,),
+                    SizedBox(
+                      height: height*0.01,
+                    ),
+                    Text('35.2', style: infofont,)
+                  ],
+                ),
+              ),
+            ],
+
+          )
+
+        ],
+      )
     );
   }
+}
+Color concolor(double a)
+{
+  final container_color=[Color.fromRGBO(0, 0, 139, 0.7),Colors.lightBlue,Colors.amber,Colors.orange,Colors.deepOrange,Colors.red];
+  int i;
+  if(a<15.0)
+  {
+    i=0;
+  }
+  else if(a>=15.0 && a<20.0)
+  {
+    i=1;
+  }
+  else if(a>=20.0 && a<25.0)
+  {
+    i=2;
+  }
+  else if(a>=25.0 && a<30.0)
+  {
+    i=3;
+  }
+  else if(a>=30.0 && a<35)
+  {
+    i=4;
+  }
+  else
+  {
+    i=5;
+  }
+  return container_color[i];
 }
