@@ -67,18 +67,30 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Center(child: Text(widget.title)),
-        backgroundColor: Colors.white54,
 
+
+
+
+        title: Text(widget.title),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const NewsMain()),
+              );
+            },
+            icon: const Icon(Icons.add),
+          ),
+        ],
       ),
       backgroundColor: Color(0xFFf9f9f9),
 
       body: FetchScreen(),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>LocationPage()));
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => LocationPage()));
         },
         child: const Icon(Icons.pin_drop),
       ), // This trailing comma makes auto-formatting nicer for build methods.
