@@ -29,7 +29,7 @@ class _NewsPageState extends State<NewsPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.news.title!,
+                  widget.news.title==null ? "": widget.news.title!,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
@@ -46,8 +46,8 @@ class _NewsPageState extends State<NewsPage> {
                         // width: 100,
                         // height: 100,
                       ),
-                Text("${widget.news.content!}\n"),
-                Text("Authors- \n\t${widget.news.creator}"),
+                Text("${widget.news.content==null ? "": widget.news.content!}\n"),
+                Text("Authors- \n\t${widget.news.creator==null ? "": widget.news.creator!}"),
               ],
             ),
           ),
