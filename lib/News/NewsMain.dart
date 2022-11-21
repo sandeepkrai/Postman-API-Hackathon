@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:postmanapihackathon/News/Services/api_service.dart';
+import 'package:postmanapihackathon/News/newspage.dart';
 
 import 'models/news_object.dart';
 
@@ -31,18 +32,18 @@ class _NewsMainState extends State<NewsMain> {
                 ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      pageNumber++;
-                    });
-                  },
-                  child: const Text("Next"),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
                       pageNumber--;
                     });
                   },
                   child: const Text("Previous"),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      pageNumber++;
+                    });
+                  },
+                  child: const Text("Next"),
                 ),
               ],
             ),
@@ -58,35 +59,36 @@ class _NewsMainState extends State<NewsMain> {
                     child: Column(
                       children: data!
                           .map(
-                            (e) => Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        "${e.title!.trim()}\n",
-                                        // softWrap: true,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20,
-                                        ),
+                            (e) => GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => NewsPage(news: e)));
+                              },
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      "${e.title!.trim()}\n",
+                                      // softWrap: true,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
                                       ),
                                     ),
-                                    e.imageUrl == null
-                                        ? const SizedBox(
-                                            width: 100,
-                                            height: 100,
-                                          )
-                                        : Image.network(
-                                            e.imageUrl!,
-                                            fit: BoxFit.cover,
-                                            width: 100,
-                                            height: 100,
-                                          ),
-                                  ],
-                                ),
-                              ],
+                                  ),
+                                  e.imageUrl == null
+                                      ? const SizedBox(
+                                          width: 100,
+                                          height: 100,
+                                        )
+                                      : Image.network(
+                                          e.imageUrl!,
+                                          fit: BoxFit.cover,
+                                          width: 100,
+                                          height: 100,
+                                        ),
+                                ],
+                              ),
                             ),
                           )
                           .toList(),
