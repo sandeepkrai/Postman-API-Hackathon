@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blueGrey,
       ),
       home: const MyHomePage(title: 'Weather Page'),
     );
@@ -67,6 +67,10 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
+
+
+
+
         title: Text(widget.title),
         actions: [
           IconButton(
@@ -80,13 +84,15 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
+      backgroundColor: Color(0xFFf9f9f9),
+
       body: FetchScreen(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => LocationPage()));
         },
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.pin_drop),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
