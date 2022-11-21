@@ -26,26 +26,29 @@ class _NewsMainState extends State<NewsMain> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      pageNumber--;
-                    });
-                  },
-                  child: const Text("Previous"),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      pageNumber++;
-                    });
-                  },
-                  child: const Text("Next"),
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 5.0,bottom: 12.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        pageNumber--;
+                      });
+                    },
+                    child: const Text("Previous"),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        pageNumber++;
+                      });
+                    },
+                    child: const Text("Next"),
+                  ),
+                ],
+              ),
             ),
             FutureBuilder(
               future: _api.getNews(pageNumber: pageNumber),
@@ -64,30 +67,43 @@ class _NewsMainState extends State<NewsMain> {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (context) => NewsPage(news: e)));
                               },
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Text(
-                                      "${e.title!.trim()}\n",
-                                      // softWrap: true,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20,
-                                      ),
-                                    ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  padding: EdgeInsets.all(8.0),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.rectangle,
+                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                    color: Colors.grey
                                   ),
-                                  e.imageUrl == null
-                                      ? const SizedBox(
-                                          width: 100,
-                                          height: 100,
-                                        )
-                                      : Image.network(
-                                          e.imageUrl!,
-                                          fit: BoxFit.cover,
-                                          width: 100,
-                                          height: 100,
+                                  child: Row(
+
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          "${e.title!.trim()}\n",
+                                          // softWrap: true,
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20,
+                                          ),
                                         ),
-                                ],
+                                      ),
+
+                                      e.imageUrl == null
+                                          ? const SizedBox(
+                                              width: 100,
+                                              height: 100,
+                                            )
+                                          : Image.network(
+                                              e.imageUrl!,
+                                              fit: BoxFit.cover,
+                                              width: 100,
+                                              height: 100,
+                                            ),
+                                    ],
+                                  ),
+                                ),
                               ),
                             ),
                           )

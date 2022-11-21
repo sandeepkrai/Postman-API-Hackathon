@@ -32,205 +32,209 @@ class _FetchScreenState extends State<FetchScreen> {
   Widget build(BuildContext context) {
     var height= MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    var size= width*height;
     TextStyle titlefont= TextStyle(fontWeight: FontWeight.w600, fontSize: width*0.055);
     TextStyle infofont= TextStyle(fontWeight: FontWeight.w400, fontSize: width*0.053,color: Colors.grey);
 
 
 
-    return Center(
+    return SingleChildScrollView(
+      child: Center(
 
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: height*0.03,
-          ),
-          Icon(
-            Icons.water_drop,
-            color: Colors.blue,
-            size: height*0.1,
-          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: height*0.03,
+            ),
+            Icon(
+              Icons.water_drop,
+              color: Colors.blue,
+              size: height*0.1,
+            ),
 
-          SizedBox(
-            height: height*0.01,
-          ),
-      Text('25.1',style: TextStyle(fontWeight: FontWeight.w400,fontSize: width*0.16),),
-      // Column(
-      //   children: [
-      //     FutureBuilder<WeatherData>(
-      //       future: getData(),
-      //       builder: (context, snapshot){
-      //         if(snapshot.hasData){
-      //           return Text(snapshot.data!.weather![0].main.toString(),
-      //             style: TextStyle(fontWeight: FontWeight.w700,fontSize: width*0.1),
-      //            );
-      //         }
-      //         else{
-      //           return Text('Loading');
-      //         }
-      //       },
-      //     )
-      //    ],
-      //   ),
-          Text('Manipal', style: TextStyle(fontSize: width*0.06,color:Colors.grey ),),
+            SizedBox(
+              height: height*0.01,
+            ),
+        Text('25.1',style: TextStyle(fontWeight: FontWeight.w400,fontSize: width*0.16),),
+        // Column(
+        //   children: [
+        //     FutureBuilder<WeatherData>(
+        //       future: getData(),
+        //       builder: (context, snapshot){
+        //         if(snapshot.hasData){
+        //           return Text(snapshot.data!.weather![0].main.toString(),
+        //             style: TextStyle(fontWeight: FontWeight.w700,fontSize: width*0.1),
+        //            );
+        //         }
+        //         else{
+        //           return Text('Loading');
+        //         }
+        //       },
+        //     )
+        //    ],
+        //   ),
+            Text('Manipal', style: TextStyle(fontSize: width*0.06,color:Colors.grey ),),
 
-          SizedBox(height: height*0.03,),
-          Align(
-            child: Padding(
-              padding:  EdgeInsets.only(left:width*0.05),
-              child: Text("Today",
-                style: TextStyle(fontSize: width*0.06,color: Colors.black54, fontWeight: FontWeight.w800),
+            SizedBox(height: height*0.03,),
+            Align(
+              child: Padding(
+                padding:  EdgeInsets.only(left:width*0.05),
+                child: Text("Today",
+                  style: TextStyle(fontSize: width*0.06,color: Colors.black54, fontWeight: FontWeight.w800),
+                ),
+              ),
+              alignment: Alignment.centerLeft,
+            ),
+            Divider(
+              thickness: height*0.001,
+              color: Colors.grey,
+            ),
+            //SizedBox(height: height*0.02),
+            Container(
+
+              height: height*0.15,
+              width: width*0.9,
+              child: ListView.builder(
+                itemCount: temp.length,
+                scrollDirection: Axis.horizontal,
+
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(right:5.0),
+                    child: Card(
+                      elevation: 05.0,
+
+                      child: Container(
+
+
+                        child: Center(
+                            child: Text(temp[index].toString(),
+                          style: TextStyle(fontWeight: FontWeight.w700, fontSize: width*0.053,color: Colors.white),
+                          )
+                        ),
+
+                        //height: height*0.13
+                        decoration: new BoxDecoration(
+                          color: concolor(temp[index]),
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+
+                        ),
+                        width: width * 0.18,
+                      ),
+                      color: Colors.transparent,
+                    ),
+                  );
+
+                }
+
               ),
             ),
-            alignment: Alignment.centerLeft,
-          ),
-          Divider(
-            thickness: height*0.001,
-            color: Colors.grey,
-          ),
-          //SizedBox(height: height*0.02),
-          Container(
+            SizedBox(height: height*0.06),
+            Align(
+              child: Padding(
+                padding:  EdgeInsets.only(left:width*0.05),
+                child: Text("Additional Information",
+                  style: TextStyle(fontSize: width*0.06,color: Colors.black54, fontWeight: FontWeight.w800),
+                ),
+              ),
+              alignment: Alignment.centerLeft,
+            ),
+            Divider(
+              thickness: height*0.001,
+              color: Colors.grey,
+            ),
+            SizedBox(
+              height: height*0.01,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Padding(
+                  padding:  EdgeInsets.only(left:width*0.03),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
 
-            height: height*0.15,
-            width: width*0.9,
-            child: ListView.builder(
-              itemCount: temp.length,
-              scrollDirection: Axis.horizontal,
-
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(right:5.0),
-                  child: Card(
-                    elevation: 05.0,
-
-                    child: Container(
-
-
-                      child: Center(
-                          child: Text(temp[index].toString(),
-                        style: TextStyle(fontWeight: FontWeight.w700, fontSize: width*0.053,color: Colors.white),
-                        )
+                    children: [
+                        Text('Visibility', style: titlefont,),
+                      SizedBox(
+                        height: height*0.01,
                       ),
-
-                      //height: height*0.13
-                      decoration: new BoxDecoration(
-                        color: concolor(temp[index]),
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-
+                      Text('Pressure', style: titlefont,),
+                      SizedBox(
+                        height: height*0.01,
                       ),
-                      width: width * 0.18,
-                    ),
+                      Text('Min Temp', style: titlefont,)
+                    ],
                   ),
-                );
-
-              }
-
-            ),
-          ),
-          SizedBox(height: height*0.06),
-          Align(
-            child: Padding(
-              padding:  EdgeInsets.only(left:width*0.05),
-              child: Text("Additional Information",
-                style: TextStyle(fontSize: width*0.06,color: Colors.black54, fontWeight: FontWeight.w800),
-              ),
-            ),
-            alignment: Alignment.centerLeft,
-          ),
-          Divider(
-            thickness: height*0.001,
-            color: Colors.grey,
-          ),
-          SizedBox(
-            height: height*0.01,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Padding(
-                padding:  EdgeInsets.only(left:width*0.03),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-
-                  children: [
-                      Text('Visibility', style: titlefont,),
-                    SizedBox(
-                      height: height*0.01,
-                    ),
-                    Text('Pressure', style: titlefont,),
-                    SizedBox(
-                      height: height*0.01,
-                    ),
-                    Text('Min Temp', style: titlefont,)
-                  ],
                 ),
-              ),
-              Padding(
-                padding:  EdgeInsets.only(left:width*0.03),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Padding(
+                  padding:  EdgeInsets.only(left:width*0.03),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
 
-                  children: [
-                    Text('4.5 km', style: infofont,),
-                    SizedBox(
-                      height: height*0.01,
-                    ),
-                    Text('1014', style: infofont,),
-                    SizedBox(
-                      height: height*0.01,
-                    ),
-                    Text('19 ', style: infofont,)
-                  ],
+                    children: [
+                      Text('4.5 km', style: infofont,),
+                      SizedBox(
+                        height: height*0.01,
+                      ),
+                      Text('1014', style: infofont,),
+                      SizedBox(
+                        height: height*0.01,
+                      ),
+                      Text('19 ', style: infofont,)
+                    ],
+                  ),
                 ),
-              ),
-              Padding(
-                padding:  EdgeInsets.only(left:width*0.03),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Padding(
+                  padding:  EdgeInsets.only(left:width*0.03),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
 
-                  children: [
-                    Text('Humidity', style: titlefont,),
-                    SizedBox(
-                      height: height*0.01,
-                    ),
-                    Text('Feels Like', style: titlefont,),
-                    SizedBox(
-                      height: height*0.01,
-                    ),
-                    Text('Max Temp', style: titlefont,)
-                  ],
+                    children: [
+                      Text('Humidity', style: titlefont,),
+                      SizedBox(
+                        height: height*0.01,
+                      ),
+                      Text('Feels Like', style: titlefont,),
+                      SizedBox(
+                        height: height*0.01,
+                      ),
+                      Text('Max Temp', style: titlefont,)
+                    ],
+                  ),
                 ),
-              ),
-              Padding(
-                padding:  EdgeInsets.only(left:width*0.03),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Padding(
+                  padding:  EdgeInsets.only(left:width*0.03),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
 
-                  children: [
-                    Text('93%', style: infofont,),
-                    SizedBox(
-                      height: height*0.01,
-                    ),
-                    Text('31', style: infofont,),
-                    SizedBox(
-                      height: height*0.01,
-                    ),
-                    Text('35.2', style: infofont,)
-                  ],
+                    children: [
+                      Text('93%', style: infofont,),
+                      SizedBox(
+                        height: height*0.01,
+                      ),
+                      Text('31', style: infofont,),
+                      SizedBox(
+                        height: height*0.01,
+                      ),
+                      Text('35.2', style: infofont,)
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
 
-          )
+            )
 
-        ],
-      )
+          ],
+        )
+      ),
     );
   }
 }
