@@ -33,7 +33,7 @@ class _FetchScreenState extends State<FetchScreen> {
     var height= MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     TextStyle titlefont= TextStyle(fontWeight: FontWeight.w600, fontSize: width*0.055);
-    TextStyle infofont= TextStyle(fontWeight: FontWeight.w400, fontSize: width*0.053,color: Colors.grey);
+    TextStyle infofont= TextStyle(fontWeight: FontWeight.w400, fontSize: width*0.053,color: Color.fromRGBO(255,255,255,0.8));
 
 
 
@@ -47,6 +47,7 @@ class _FetchScreenState extends State<FetchScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
+
                     SizedBox(
                       height: height*0.03,
                     ),
@@ -145,6 +146,7 @@ class _FetchScreenState extends State<FetchScreen> {
                                   width: width * 0.3,
 
                                 ),
+                                color: Colors.transparent,
                               ),
                             );
 

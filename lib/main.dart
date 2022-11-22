@@ -84,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      backgroundColor: Color(0xFFf9f9f9),
+      backgroundColor: Color.fromRGBO(	137, 207, 240,1),
 
       body: FetchScreen(),
       floatingActionButton: FloatingActionButton(
