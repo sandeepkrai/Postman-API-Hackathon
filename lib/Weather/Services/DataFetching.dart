@@ -24,9 +24,9 @@ class _FetchScreenState extends State<FetchScreen> {
       return WeatherData.fromJson(data);
     }
   }
-  final temp= [14.5,16.9,18.9,19.5,21.0,22.3,25.1,27.2,37.2,31.2,25.6,21.3,19.3,17.7,15.5];
-
-  int ci=0;
+  final temp= [14.5,28.0,18.5,20.0,41.2,19.5,16.3,35.2,19.1];
+  final day= ["Today","Tuesday","Wednesday"];
+  int d=0;
 
   @override
   Widget build(BuildContext context) {
@@ -111,10 +111,14 @@ class _FetchScreenState extends State<FetchScreen> {
                                 child: Container(
 
 
-                                  child: Center(
-                                      child: Text(temp[index].toString(),
-                                        style: TextStyle(fontWeight: FontWeight.w700, fontSize: width*0.053,color: Colors.white),
-                                      )
+                                  child: Center(child:Column(children: [
+                                    //Text(day[(index/3).floor()]),
+                                    Text(temp[index].toString(),
+                                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: width*0.053,color: Colors.white),
+
+                                      ]
+                                  ))
+
                                   ),
 
                                   //height: height*0.13
