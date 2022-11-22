@@ -16,27 +16,29 @@ class NewsPage extends StatefulWidget {
 class _NewsPageState extends State<NewsPage> {
   @override
   Widget build(BuildContext context) {
+    var height= MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(),
+        backgroundColor: Color.fromRGBO(255, 255, 255, 0.7),
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 5,
+            padding:  EdgeInsets.symmetric(
+              horizontal: width*0.04,
+              vertical: height*0.05,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   widget.news.title==null ? "": widget.news.title!,
-                  style: const TextStyle(
+                  style:  TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 30,
+                    fontSize: width*0.1,
                   ),
                 ),
                 SizedBox(
-                  height: 20.0,
+                  height: height*0.03,
                 ),
                 widget.news.imageUrl == null
                     ? const SizedBox(
@@ -47,14 +49,15 @@ class _NewsPageState extends State<NewsPage> {
                         widget.news.imageUrl!,
                         fit: BoxFit.cover,
 
+
                         // width: 100,
                         // height: 100,
                       ),
                 SizedBox(
-                  height: 20.0,
+                  height: height*0.03,
                 ),
-                Text("${widget.news.content==null ? "": widget.news.content!}\n", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),),
-                Text("Authors- \n\t${widget.news.creator==null ? "": widget.news.creator!}"),
+                Text("${widget.news.content==null ? "": widget.news.content!}\n", style: TextStyle(fontSize: width*0.06, fontWeight: FontWeight.normal,height: height*0.0014),),
+                Text("Authors- \n\t${widget.news.creator==null ? "": widget.news.creator!}",style: TextStyle(fontSize: width*0.045, fontWeight: FontWeight.w600,letterSpacing: height*0.001),),
               ],
             ),
           ),
