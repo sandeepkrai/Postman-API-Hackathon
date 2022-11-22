@@ -23,6 +23,7 @@ class _NewsMainState extends State<NewsMain> {
       appBar: AppBar(
         title: const Text("News"),
       ),
+      backgroundColor: Color.fromRGBO(137, 207, 240,0.2),
       body: SingleChildScrollView(
         child: Column(
           children: [
