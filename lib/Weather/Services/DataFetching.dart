@@ -111,14 +111,10 @@ class _FetchScreenState extends State<FetchScreen> {
                                 child: Container(
 
 
-                                  child: Center(child:Column(children: [
-                                    //Text(day[(index/3).floor()]),
-                                    Text(temp[index].toString(),
-                                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: width*0.053,color: Colors.white),
-
-                                      ]
-                                  ))
-
+                                  child: Center(
+                                      child: Text(temp[index].toString(),
+                                        style: TextStyle(fontWeight: FontWeight.w700, fontSize: width*0.053,color: Colors.white),
+                                      )
                                   ),
 
                                   //height: height*0.13
