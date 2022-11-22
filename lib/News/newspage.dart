@@ -29,11 +29,14 @@ class _NewsPageState extends State<NewsPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.news.title!,
+                  widget.news.title==null ? "": widget.news.title!,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 25,
+                    fontSize: 30,
                   ),
+                ),
+                SizedBox(
+                  height: 20.0,
                 ),
                 widget.news.imageUrl == null
                     ? const SizedBox(
@@ -43,11 +46,15 @@ class _NewsPageState extends State<NewsPage> {
                     : Image.network(
                         widget.news.imageUrl!,
                         fit: BoxFit.cover,
+
                         // width: 100,
                         // height: 100,
                       ),
-                Text("${widget.news.content!}\n"),
-                Text("Authors- \n\t${widget.news.creator}"),
+                SizedBox(
+                  height: 20.0,
+                ),
+                Text("${widget.news.content==null ? "": widget.news.content!}\n", style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),),
+                Text("Authors- \n\t${widget.news.creator==null ? "": widget.news.creator!}"),
               ],
             ),
           ),
