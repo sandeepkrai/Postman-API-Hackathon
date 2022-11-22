@@ -80,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 MaterialPageRoute(builder: (context) => const NewsMain()),
               );
             },
-            icon: const Icon(Icons.add),
+            icon: const Icon(Icons.newspaper),
           ),
         ],
       ),
