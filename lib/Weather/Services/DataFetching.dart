@@ -81,19 +81,7 @@ class _FetchScreenState extends State<FetchScreen> {
                     Text(snapshot.data!.name.toString(), style: TextStyle(fontSize: width*0.06,color:Colors.grey ),),
 
                     SizedBox(height: height*0.03,),
-                    Align(
-                      child: Padding(
-                        padding:  EdgeInsets.only(left:width*0.05),
-                        child: Text("Today",
-                          style: TextStyle(fontSize: width*0.06,color: Colors.black54, fontWeight: FontWeight.w800),
-                        ),
-                      ),
-                      alignment: Alignment.centerLeft,
-                    ),
-                    Divider(
-                      thickness: height*0.001,
-                      color: Colors.grey,
-                    ),
+
                     //SizedBox(height: height*0.02),
                     Container(
 
@@ -108,8 +96,18 @@ class _FetchScreenState extends State<FetchScreen> {
                               padding: const EdgeInsets.only(right:5.0),
                               child: Card(
                                 elevation: 05.0,
+                                color: Colors.transparent,
 
                                 child: Container(
+
+
+                                  decoration: BoxDecoration(
+                                    color: concolor(temp[index]),
+                                    shape: BoxShape.rectangle,
+                                    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+
+                                  ),
+                                  width: width * 0.3,
 
 
                                   child: Center(
@@ -136,17 +134,7 @@ class _FetchScreenState extends State<FetchScreen> {
                                       )
                                   ),
 
-                                  //height: height*0.13
-                                  decoration: new BoxDecoration(
-                                    color: concolor(temp[index]),
-                                    shape: BoxShape.rectangle,
-                                    borderRadius: BorderRadius.all(Radius.circular(10.0)),
-
-                                  ),
-                                  width: width * 0.3,
-
                                 ),
-                                color: Colors.transparent,
                               ),
                             );
 
