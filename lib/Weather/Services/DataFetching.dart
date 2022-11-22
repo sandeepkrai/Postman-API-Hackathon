@@ -96,7 +96,7 @@ class _FetchScreenState extends State<FetchScreen> {
                     //SizedBox(height: height*0.02),
                     Container(
 
-                      height: height*0.15,
+                      height: height*0.2,
                       width: width*0.9,
                       child: ListView.builder(
                           itemCount: temp.length,
@@ -112,8 +112,26 @@ class _FetchScreenState extends State<FetchScreen> {
 
 
                                   child: Center(
-                                      child: Text(temp[index].toString(),
-                                        style: TextStyle(fontWeight: FontWeight.w700, fontSize: width*0.053,color: Colors.white),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                                        child: Column(
+                                          children: [
+                                            Text(day[(index/3).floor()],
+                                              style: TextStyle(fontWeight: FontWeight.w700, fontSize: width*0.053,color: Colors.white),
+                                            ),
+
+                                            SizedBox(height: height*0.02,),
+
+                                            Icon(Icons.water_drop,
+                                              color: Colors.blue,
+                                            size: height*0.05,),
+
+                                            SizedBox(height: height*0.02,),
+
+                                            Text(temp[index].toString(),
+                                            style: TextStyle(fontWeight: FontWeight.w700, fontSize: width*0.053,color: Colors.white),
+                                          )],
+                                        ),
                                       )
                                   ),
 
@@ -124,7 +142,8 @@ class _FetchScreenState extends State<FetchScreen> {
                                     borderRadius: BorderRadius.all(Radius.circular(10.0)),
 
                                   ),
-                                  width: width * 0.18,
+                                  width: width * 0.3,
+
                                 ),
                               ),
                             );
