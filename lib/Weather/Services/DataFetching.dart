@@ -37,6 +37,7 @@ class _FetchScreenState extends State<FetchScreen> {
                     children: [
                      // Expanded(child: SearchButton()),
 
+
                       SizedBox(
                         height: height*0.03,
                       ),
@@ -50,7 +51,6 @@ class _FetchScreenState extends State<FetchScreen> {
                         height: height*0.01,
                       ),
                       Text((((widget.snapshot!.data!.main!.temp)!-273).round().toString())+" °C",style: TextStyle(fontWeight: FontWeight.w400,fontSize: width*0.16),),
-
                       Text(widget.snapshot!.data!.name.toString(), style: TextStyle(fontSize: width*0.06,color:Colors.grey ),),
 
                       SizedBox(height: height*0.03,),
