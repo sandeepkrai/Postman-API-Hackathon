@@ -42,7 +42,6 @@ class _FetchScreenState extends State<FetchScreen> {
         builder: (context, snapshot){
           if(snapshot.hasData){
             return Center(
-
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
