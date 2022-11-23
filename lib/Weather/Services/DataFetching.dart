@@ -81,7 +81,10 @@ class _FetchScreenState extends State<FetchScreen> {
                                     height: height*0.03,
                                   ),
                                   Text(day[(index/3).floor()],
+
+
                                   style: TextStyle(fontWeight: FontWeight.w900, fontSize: width*0.053,color: Colors.white),
+
                                   ),
                                   SizedBox(
                                     height: height*0.01,
@@ -95,8 +98,9 @@ class _FetchScreenState extends State<FetchScreen> {
                                     height: height*0.01,
                                   ),
                                   Text(temp[index].round().toString(),
-                                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: width*0.053,color: Colors.white),
-                                ),
+                                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: width*0.053,color: Colors.white),
+                                  ),
+
                                 ],
                               )
                           ),
