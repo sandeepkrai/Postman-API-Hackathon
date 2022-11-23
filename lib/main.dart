@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
-        scaffoldBackgroundColor: Colors.blueAccent
+        scaffoldBackgroundColor: Color.fromRGBO(255, 255, 255, 0.7)
       ),
       home:  SplashScreen(),
     );
