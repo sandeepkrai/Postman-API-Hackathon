@@ -7,70 +7,21 @@ import 'package:postmanapihackathon/Weather/Services/searchButton.dart';
 import '../Models/weather.dart';
 
 class FetchScreen extends StatefulWidget {
-  const FetchScreen({Key? key}) : super(key: key);
+  double? lat ;
+  double? long ;
+  AsyncSnapshot<WeatherData>? snapshot;
+  FetchScreen({this.lat, this.long, this.snapshot});
 
   @override
   State<FetchScreen> createState() => _FetchScreenState();
 }
 
 class _FetchScreenState extends State<FetchScreen> {
-
-  Future<WeatherData> getData() async{
-      final response = await http.get(Uri.parse('https://api.openweathermap.org/data/2.5/weather?lat=${_center.latitude}&lon=${_center.longitude}&appid=358af07939445d0f4e5c3daf89f19537'));
-      var data = jsonDecode(response.body.toString());
-      print(data.toString());
-      if(response.statusCode==200){
-        return WeatherData.fromJson(data);
-      }
-      else{
-        return WeatherData.fromJson(data);
-      }
-  }
   final temp= [14.5,16.9,18.9,19.5,21.0,22.3,25.1,27.2,37.2,31.2,25.6,21.3,19.3,17.7,15.5];
 
-  int ci=0;
-  late LatLng _center ;
-  late Position currentLocation;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    getUserLocation();
-  }
-
-  Future<Position> locateUser() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled');
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location permissions are denied');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location permissions are permanently denied, we cannot request permissions.');
-    }
-    return Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-  }
-
-  getUserLocation() async {
-    currentLocation = await locateUser();
-    setState(() {
-      _center = LatLng(currentLocation.latitude, currentLocation.longitude);
-    });
-    print(_center.longitude);
-  }
   @override
   Widget build(BuildContext context) {
+    print(widget.snapshot);
     var height= MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     TextStyle titlefont= TextStyle(fontWeight: FontWeight.w600, fontSize: width*0.055);
@@ -78,199 +29,189 @@ class _FetchScreenState extends State<FetchScreen> {
 
 
 
-    return SingleChildScrollView(
-      child: FutureBuilder<WeatherData>(
-        future: getData(),
-        builder: (context, snapshot){
-      if(snapshot.hasData){
-                return Center(
+    return Center(
 
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                       // Expanded(child: SearchButton()),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                     // Expanded(child: SearchButton()),
 
-                        SizedBox(
-                          height: height*0.03,
-                        ),
-                        Icon(
-                          Icons.water_drop,
-                          color: Colors.blue,
-                          size: height*0.1,
-                        ),
+                      SizedBox(
+                        height: height*0.03,
+                      ),
+                      Icon(
+                        Icons.water_drop,
+                        color: Colors.blue,
+                        size: height*0.1,
+                      ),
 
-                        SizedBox(
-                          height: height*0.01,
-                        ),
-                        Text((((snapshot.data!.main!.temp)!-273).round().toString())+" °C",style: TextStyle(fontWeight: FontWeight.w400,fontSize: width*0.16),),
+                      SizedBox(
+                        height: height*0.01,
+                      ),
+                      Text((((widget.snapshot!.data!.main!.temp)!-273).round().toString())+" °C",style: TextStyle(fontWeight: FontWeight.w400,fontSize: width*0.16),),
 
-                        Text(snapshot.data!.name.toString(), style: TextStyle(fontSize: width*0.06,color:Colors.grey ),),
+                      Text(widget.snapshot!.data!.name.toString(), style: TextStyle(fontSize: width*0.06,color:Colors.grey ),),
 
-                        SizedBox(height: height*0.03,),
-                        Align(
-                          child: Padding(
-                            padding:  EdgeInsets.only(left:width*0.05),
-                            child: Text("Today",
-                              style: TextStyle(fontSize: width*0.06,color: Colors.black54, fontWeight: FontWeight.w800),
-                            ),
+                      SizedBox(height: height*0.03,),
+                      Align(
+                        child: Padding(
+                          padding:  EdgeInsets.only(left:width*0.05),
+                          child: Text("Today",
+                            style: TextStyle(fontSize: width*0.06,color: Colors.black54, fontWeight: FontWeight.w800),
                           ),
-                          alignment: Alignment.centerLeft,
                         ),
-                        Divider(
-                          thickness: height*0.001,
-                          color: Colors.grey,
-                        ),
-                        //SizedBox(height: height*0.02),
-                        Container(
+                        alignment: Alignment.centerLeft,
+                      ),
+                      Divider(
+                        thickness: height*0.001,
+                        color: Colors.grey,
+                      ),
+                      //SizedBox(height: height*0.02),
+                      Container(
 
-                          height: height*0.15,
-                          width: width*0.9,
-                          child: ListView.builder(
-                              itemCount: temp.length,
-                              scrollDirection: Axis.horizontal,
+                        height: height*0.15,
+                        width: width*0.9,
+                        child: ListView.builder(
+                            itemCount: temp.length,
+                            scrollDirection: Axis.horizontal,
 
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(right:5.0),
-                                  child: Card(
-                                    elevation: 05.0,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(right:5.0),
+                                child: Card(
+                                  elevation: 05.0,
+color: Colors.transparent,
+                                  child: Container(
 
-                                    child: Container(
 
-
-                                      child: Center(
-                                          child: Text(temp[index].toString(),
-                                            style: TextStyle(fontWeight: FontWeight.w700, fontSize: width*0.053,color: Colors.white),
-                                          )
-                                      ),
-
-                                      //height: height*0.13
-                                      decoration: new BoxDecoration(
-                                        color: concolor(temp[index]),
-                                        shape: BoxShape.rectangle,
-                                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
-
-                                      ),
-                                      width: width * 0.18,
+                                    child: Center(
+                                        child: Text(temp[index].toString(),
+                                          style: TextStyle(fontWeight: FontWeight.w700, fontSize: width*0.053,color: Colors.white),
+                                        )
                                     ),
+
+                                    //height: height*0.13
+                                    decoration: new BoxDecoration(
+                                      color: concolor(temp[index]),
+                                      shape: BoxShape.rectangle,
+                                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+
+                                    ),
+                                    width: width * 0.18,
                                   ),
-                                );
+                                ),
+                              );
 
-                              }
+                            }
 
+                        ),
+                      ),
+                      SizedBox(height: height*0.06),
+                      Align(
+                        child: Padding(
+                          padding:  EdgeInsets.only(left:width*0.05),
+                          child: Text("Additional Information",
+                            style: TextStyle(fontSize: width*0.06,color: Colors.black54, fontWeight: FontWeight.w800),
                           ),
                         ),
-                        SizedBox(height: height*0.06),
-                        Align(
-                          child: Padding(
-                            padding:  EdgeInsets.only(left:width*0.05),
-                            child: Text("Additional Information",
-                              style: TextStyle(fontSize: width*0.06,color: Colors.black54, fontWeight: FontWeight.w800),
+                        alignment: Alignment.centerLeft,
+                      ),
+                      Divider(
+                        thickness: height*0.001,
+                        color: Colors.grey,
+                      ),
+                      SizedBox(
+                        height: height*0.01,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Padding(
+                            padding:  EdgeInsets.only(left:width*0.03),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+
+                              children: [
+                                Text('Visibility', style: titlefont,),
+                                SizedBox(
+                                  height: height*0.01,
+                                ),
+                                Text('Pressure', style: titlefont,),
+                                SizedBox(
+                                  height: height*0.01,
+                                ),
+                                Text('Min Temp', style: titlefont,)
+                              ],
                             ),
                           ),
-                          alignment: Alignment.centerLeft,
-                        ),
-                        Divider(
-                          thickness: height*0.001,
-                          color: Colors.grey,
-                        ),
-                        SizedBox(
-                          height: height*0.01,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Padding(
-                              padding:  EdgeInsets.only(left:width*0.03),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                          Padding(
+                            padding:  EdgeInsets.only(left:width*0.03),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
 
-                                children: [
-                                  Text('Visibility', style: titlefont,),
-                                  SizedBox(
-                                    height: height*0.01,
-                                  ),
-                                  Text('Pressure', style: titlefont,),
-                                  SizedBox(
-                                    height: height*0.01,
-                                  ),
-                                  Text('Min Temp', style: titlefont,)
-                                ],
-                              ),
+                              children: [
+                                Text(((widget.snapshot!.data!.visibility)!/1000).toString()+" KM", style: infofont,),
+                                SizedBox(
+                                  height: height*0.01,
+                                ),
+                                Text(widget.snapshot!.data!.main!.pressure.toString(), style: infofont,),
+                                SizedBox(
+                                  height: height*0.01,
+                                ),
+                                Text(widget.snapshot!.data!.main!.tempMin.toString(), style: infofont,)
+                              ],
                             ),
-                            Padding(
-                              padding:  EdgeInsets.only(left:width*0.03),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                          ),
+                          Padding(
+                            padding:  EdgeInsets.only(left:width*0.03),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
 
-                                children: [
-                                  Text(((snapshot.data!.visibility)!/1000).toString()+" KM", style: infofont,),
-                                  SizedBox(
-                                    height: height*0.01,
-                                  ),
-                                  Text(snapshot.data!.main!.pressure.toString(), style: infofont,),
-                                  SizedBox(
-                                    height: height*0.01,
-                                  ),
-                                  Text(snapshot.data!.main!.tempMin.toString(), style: infofont,)
-                                ],
-                              ),
+                              children: [
+                                Text('Humidity', style: titlefont,),
+                                SizedBox(
+                                  height: height*0.01,
+                                ),
+                                Text('Feels Like', style: titlefont,),
+                                SizedBox(
+                                  height: height*0.01,
+                                ),
+                                Text('Max Temp', style: titlefont,)
+                              ],
                             ),
-                            Padding(
-                              padding:  EdgeInsets.only(left:width*0.03),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                          ),
+                          Padding(
+                            padding:  EdgeInsets.only(left:width*0.03),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
 
-                                children: [
-                                  Text('Humidity', style: titlefont,),
-                                  SizedBox(
-                                    height: height*0.01,
-                                  ),
-                                  Text('Feels Like', style: titlefont,),
-                                  SizedBox(
-                                    height: height*0.01,
-                                  ),
-                                  Text('Max Temp', style: titlefont,)
-                                ],
-                              ),
+                              children: [
+                                Text(widget.snapshot!.data!.main!.humidity.toString()+"%", style: infofont,),
+                                SizedBox(
+                                  height: height*0.01,
+                                ),
+                                Text(widget.snapshot!.data!.main!.feelsLike.toString(), style: infofont,),
+                                SizedBox(
+                                  height: height*0.01,
+                                ),
+                                Text(widget.snapshot!.data!.main!.tempMax.toString(), style: infofont,)
+                              ],
                             ),
-                            Padding(
-                              padding:  EdgeInsets.only(left:width*0.03),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                          ),
+                        ],
 
-                                children: [
-                                  Text(snapshot.data!.main!.humidity.toString()+"%", style: infofont,),
-                                  SizedBox(
-                                    height: height*0.01,
-                                  ),
-                                  Text(snapshot.data!.main!.feelsLike.toString(), style: infofont,),
-                                  SizedBox(
-                                    height: height*0.01,
-                                  ),
-                                  Text(snapshot.data!.main!.tempMax.toString(), style: infofont,)
-                                ],
-                              ),
-                            ),
-                          ],
+                      )
 
-                        )
+                    ],
+                  )
+              );
 
-                      ],
-                    )
-                );
-               }
-               else{
-                return Text('Loading');
-              }
-        }
-      ),
-    );
+
   }
 }
 Color concolor(double a)
