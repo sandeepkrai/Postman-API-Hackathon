@@ -17,7 +17,8 @@ class FetchScreen extends StatefulWidget {
 }
 
 class _FetchScreenState extends State<FetchScreen> {
-  final temp= [14.5,16.9,18.9,19.5,21.0,22.3,25.1,27.2,37.2,31.2,25.6,21.3,19.3,17.7,15.5];
+  final day=["Today","Tuesday","Wednesday"];
+  final temp= [14.5,28.0,16.0,15.2,35.1,18.4,19.0,42.3,21.3];
 
   @override
   Widget build(BuildContext context) {
@@ -54,23 +55,11 @@ class _FetchScreenState extends State<FetchScreen> {
             Text(widget.snapshot!.data!.name.toString(), style: TextStyle(fontSize: width*0.06,color:Colors.grey ),),
 
             SizedBox(height: height*0.03,),
-            Align(
-              child: Padding(
-                padding:  EdgeInsets.only(left:width*0.05),
-                child: Text("Today",
-                  style: TextStyle(fontSize: width*0.06,color: Colors.black54, fontWeight: FontWeight.w800),
-                ),
-              ),
-              alignment: Alignment.centerLeft,
-            ),
-            Divider(
-              thickness: height*0.001,
-              color: Colors.grey,
-            ),
+
             //SizedBox(height: height*0.02),
             Container(
 
-              height: height*0.15,
+              height: height*0.2,
               width: width*0.9,
               child: ListView.builder(
                   itemCount: temp.length,
@@ -86,8 +75,29 @@ class _FetchScreenState extends State<FetchScreen> {
 
 
                           child: Center(
-                              child: Text(temp[index].toString(),
-                                style: TextStyle(fontWeight: FontWeight.w700, fontSize: width*0.053,color: Colors.white),
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: height*0.03,
+                                  ),
+                                  Text(day[(index/3).floor()],
+                                  style: TextStyle(fontWeight: FontWeight.w900, fontSize: width*0.053,color: Colors.white),
+                                  ),
+                                  SizedBox(
+                                    height: height*0.01,
+                                  ),
+                                  Icon(
+                                    Icons.water_drop,
+                                    color: Colors.blue,
+                                    size: height*0.05,
+                                  ),
+                                  SizedBox(
+                                    height: height*0.01,
+                                  ),
+                                  Text(temp[index].round().toString(),
+                                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: width*0.053,color: Colors.white),
+                                ),
+                                ],
                               )
                           ),
 
@@ -98,7 +108,7 @@ class _FetchScreenState extends State<FetchScreen> {
                             borderRadius: BorderRadius.all(Radius.circular(10.0)),
 
                           ),
-                          width: width * 0.18,
+                          width: width * 0.3,
                         ),
                       ),
                     );
