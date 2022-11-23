@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:postmanapihackathon/News/NewsMain.dart';
 import 'package:postmanapihackathon/Weather/Services/DataFetching.dart';
-import 'package:postmanapihackathon/Weather/Services/Location.dart';
-import 'package:postmanapihackathon/Weather/location.dart';
-import 'package:postmanapihackathon/Weather/weatherMain.dart';
+import 'package:postmanapihackathon/Weather/Services/searchScreen.dart';
+import 'package:postmanapihackathon/Weather/Services/splashScreen.dart';
+
+import 'Weather/Models/weather.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,62 +17,37 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
+        scaffoldBackgroundColor: Color.fromRGBO(255, 255, 255, 0.7)
       ),
-      home: const MyHomePage(title: 'Weather Page'),
+      home:  SplashScreen(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+  double? lat = 0;
+  double? long = 0;
+  AsyncSnapshot<WeatherData>? snapshot;
+  MyHomePage({this.lat, this.long, this.snapshot});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  _initUser(){
+    print("i m here");
   }
-
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    print(widget.snapshot);
     return Scaffold(
       appBar: AppBar(
-
-
-
-
-        title: Text(widget.title),
+        title: Text("Weather"),
         actions: [
           IconButton(
             onPressed: () {
@@ -84,16 +60,16 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      backgroundColor: Color.fromRGBO(	137, 207, 240,1),
 
-      body: FetchScreen(),
+      backgroundColor: Color.fromRGBO(	137, 207, 240,1),
+      body:  SingleChildScrollView(child: FetchScreen(lat: widget.lat, long: widget.long,snapshot: widget.snapshot,)),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => LocationPage()));
+              context, MaterialPageRoute(builder: (context) => const Search()));
         },
-        child: const Icon(Icons.pin_drop),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        child: const Icon(Icons.search),
+      ),
     );
   }
 }
