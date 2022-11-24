@@ -11,30 +11,30 @@ import '../Models/weather.dart';
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
-  double? lat ;
-  double? long ;
+  double? lat;
+
+  double? long;
+
   SplashScreen({this.lat, this.long});
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
-  Future<WeatherData> getData() async{
-    final response = await http.get(Uri.parse('https://api.openweathermap.org/data/2.5/weather?lat=${_center.latitude}&lon=${_center.longitude}&appid=358af07939445d0f4e5c3daf89f19537'));
+  Future<WeatherData> getData() async {
+    final response = await http.get(Uri.parse(
+        'https://api.openweathermap.org/data/2.5/weather?lat=${_center.latitude}&lon=${_center.longitude}&appid=358af07939445d0f4e5c3daf89f19537'));
     var data = jsonDecode(response.body.toString());
     print(data.toString());
-    if(response.statusCode==200){
+    if (response.statusCode == 200) {
       return WeatherData.fromJson(data);
-    }
-    else{
+    } else {
       return WeatherData.fromJson(data);
     }
   }
 
+  int ci = 0;
+  late LatLng _center;
 
-  int ci=0;
-  late LatLng _center ;
   late Position currentLocation;
-
 
   Future<Position> locateUser() async {
     bool serviceEnabled;
@@ -57,7 +57,8 @@ class _SplashScreenState extends State<SplashScreen> {
       return Future.error(
           'Location permissions are permanently denied, we cannot request permissions.');
     }
-    return Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    return Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
   }
 
   getUserLocation() async {
@@ -75,25 +76,26 @@ class _SplashScreenState extends State<SplashScreen> {
     getUserLocation();
   }
 
-
   _initUser() async {
     FutureBuilder<WeatherData>(
         future: getData(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             print(snapshot);
-            return MyHomePage(snapshot: snapshot,);
-          }
-          else {
+            return MyHomePage(
+              snapshot: snapshot,
+            );
+          } else {
             return Center(
               child: CircularProgressIndicator(),
             );
           }
         });
   }
+
   @override
   Widget build(BuildContext context) {
-    if(widget.lat!=null){
+    if (widget.lat != null) {
       _center = LatLng(widget.lat!, widget.long!);
     }
     return Scaffold(
@@ -104,16 +106,30 @@ class _SplashScreenState extends State<SplashScreen> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 print(snapshot);
-                return MyHomePage(snapshot: snapshot,);
-              }
-              else {
+                return MyHomePage(
+                  snapshot: snapshot,
+                );
+              } else {
                 return Center(
-                  child: CircularProgressIndicator(),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        "assets/cloudy.png",
+                        width: 200,
+                        height: 200,
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      CircularProgressIndicator(),
+                    ],
+                  ),
                 );
               }
             }),
       ),
-
     );
   }
 }
