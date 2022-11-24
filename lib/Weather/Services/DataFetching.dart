@@ -76,7 +76,7 @@ class _FetchScreenState extends State<FetchScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Image.network('http://openweathermap.org/img/wn/${widget.snapshot!.data!.weather![0].icon}@2x.png'),
 
@@ -87,18 +87,28 @@ class _FetchScreenState extends State<FetchScreen> {
                           children: [
                             Text(widget.snapshot!.data!.weather![0].main.toString(), style: TextStyle(fontWeight: FontWeight.w800, color: Colors.white, fontSize: width*0.08),),
                             SizedBox(height: height*0.01,),
-                            Text("${DateFormat.MMMEd().format(DateTime.now())}",style: TextStyle(fontSize: width*0.04,color:Color.fromRGBO(255, 255, 255, 0.8) ), ),
-
-                            SizedBox(height: height*0.001,),
                             Text(widget.snapshot!.data!.name.toString(),
-                              style: TextStyle(fontSize: width*0.04,color:Color.fromRGBO(255, 255, 255, 0.8) ),),
+                              style: TextStyle(fontSize: width*0.054,color:Color.fromRGBO(255, 255, 255, 0.8),fontWeight: FontWeight.w700 ),),
+                            SizedBox(height: height*0.005,),
+                            Row(
+                              children: [
+                                Text("${DateFormat.Hm().format(DateTime.now())}", style: TextStyle(fontSize: width*0.043,color:Color.fromRGBO(255, 255, 255, 0.8) ),),
+                                SizedBox(width: width*0.015,),
+
+                                Text("${DateFormat.MMMEd().format(DateTime.now())}",style: TextStyle(fontSize: width*0.043,color:Color.fromRGBO(255, 255, 255, 0.8) ), ),
+                              ],
+                            ),
+
                           ],
                         ),
                         SizedBox(
-                          width: width*0.07,
+                          width: width*0.02,
                         ),
                         Text((((widget.snapshot!.data!.main!.temp)!-273).round().toString())+" °C",
                           style: TextStyle(fontWeight: FontWeight.w500,fontSize: width*0.11, color: Colors.white),),
+                        SizedBox(
+                          width: width*0.02,
+                        )
 
                       ],
                     ),

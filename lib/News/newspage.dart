@@ -87,6 +87,8 @@ class _NewsPageState extends State<NewsPage> {
                     : Text(
                         "Authors: ${widget.news.creator!}",
                         style: TextStyle(
+                          color: Color.fromRGBO(255, 255, 255, 0.85),
+
                           fontSize: width * 0.045,
                           fontWeight: FontWeight.w600,
                           letterSpacing: height * 0.001,
