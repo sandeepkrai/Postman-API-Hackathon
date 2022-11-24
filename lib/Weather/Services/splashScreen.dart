@@ -97,19 +97,22 @@ class _SplashScreenState extends State<SplashScreen> {
       _center = LatLng(widget.lat!, widget.long!);
     }
     return Scaffold(
-      body: FutureBuilder<WeatherData>(
-          future: getData(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              print(snapshot);
-              return MyHomePage(snapshot: snapshot,);
-            }
-            else {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-          }),
+      body: Container(
+        color: Color.fromRGBO(4, 12, 44, 1),
+        child: FutureBuilder<WeatherData>(
+            future: getData(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                print(snapshot);
+                return MyHomePage(snapshot: snapshot,);
+              }
+              else {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            }),
+      ),
 
     );
   }

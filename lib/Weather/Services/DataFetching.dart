@@ -60,17 +60,14 @@ class _FetchScreenState extends State<FetchScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(
-                      Icons.water_drop,
-                      color: Colors.blue,
-                      size: height*0.12,
-                    ),
+                    Image.network('http://openweathermap.org/img/wn/${widget.snapshot!.data!.weather![0].icon}@2x.png'),
+
 
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("Cloudy", style: TextStyle(fontWeight: FontWeight.w800, color: Colors.white, fontSize: width*0.08),),
+                        Text(widget.snapshot!.data!.weather![0].main.toString(), style: TextStyle(fontWeight: FontWeight.w800, color: Colors.white, fontSize: width*0.08),),
                         SizedBox(height: height*0.01,),
                         Text("${DateFormat.MMMEd().format(DateTime.now())}",style: TextStyle(fontSize: width*0.04,color:Color.fromRGBO(255, 255, 255, 0.8) ), ),
                         SizedBox(height: height*0.001,),
@@ -252,7 +249,7 @@ class _FetchScreenState extends State<FetchScreen> {
 }
 Color concolor(double a)
 {
-  final container_color=[Color.fromRGBO(0, 0, 139, 0.7),Colors.lightBlue,Colors.amber,Colors.orange,Colors.deepOrange,Colors.red];
+  final container_color=[const Color.fromRGBO(0, 0, 139, 0.7),Colors.lightBlue,Colors.amber,Colors.orange,Colors.deepOrange,Colors.red];
   int i;
   if(a<15.0)
   {
