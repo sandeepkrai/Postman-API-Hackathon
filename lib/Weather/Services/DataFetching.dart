@@ -252,7 +252,7 @@ class _FetchScreenState extends State<FetchScreen> {
 }
 Color concolor(double a)
 {
-  final container_color=[Color.fromRGBO(0, 0, 139, 0.7),Colors.lightBlue,Colors.amber,Colors.orange,Colors.deepOrange,Colors.red];
+  final container_color=[const Color.fromRGBO(0, 0, 139, 0.7),Colors.lightBlue,Colors.amber,Colors.orange,Colors.deepOrange,Colors.red];
   int i;
   if(a<15.0)
   {
