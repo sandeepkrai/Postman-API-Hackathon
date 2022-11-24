@@ -18,10 +18,10 @@ class _NewsMainState extends State<NewsMain> {
     final ApiService api = ApiService();
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:  Color.fromRGBO(	4, 12, 44,1),
+        backgroundColor: Color.fromRGBO(4, 12, 44, 1),
         title: const Text("News"),
       ),
-      backgroundColor: Color.fromRGBO(	4, 12, 44,1),
+      backgroundColor: Color.fromRGBO(4, 12, 44, 1),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -32,8 +32,10 @@ class _NewsMainState extends State<NewsMain> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ElevatedButton(
-              style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Color.fromRGBO(64, 198, 233, 1)),),
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          Color.fromRGBO(64, 198, 233, 1)),
+                    ),
                     onPressed: () {
                       if (pageNumber > 0) {
                         setState(() {
@@ -46,7 +48,9 @@ class _NewsMainState extends State<NewsMain> {
                   ),
                   ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Color.fromRGBO(64, 198, 233, 1)),),
+                      backgroundColor: MaterialStateProperty.all(
+                          Color.fromRGBO(64, 198, 233, 1)),
+                    ),
                     onPressed: () {
                       setState(() {
                         // Changes the page number and hence the api is called for the changed page number
@@ -65,7 +69,8 @@ class _NewsMainState extends State<NewsMain> {
                 BuildContext context,
                 AsyncSnapshot<List<NewsObject>?> snapshot,
               ) {
-                if (snapshot.hasData) {
+                if (snapshot.hasData &&
+                    snapshot.connectionState == ConnectionState.done) {
                   List<NewsObject>? data = snapshot.data;
                   // Fetching the snapshot data into variable
                   return SingleChildScrollView(
@@ -80,17 +85,18 @@ class _NewsMainState extends State<NewsMain> {
                                     builder: (context) => NewsPage(news: e),
                                   ),
                                 );
-                              // Pushing to a new page when clicking a news card
+                                // Pushing to a new page when clicking a news card
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
                                   padding: const EdgeInsets.all(8.0),
                                   decoration: const BoxDecoration(
-                                      shape: BoxShape.rectangle,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0)),
-                                      color: Color.fromRGBO(14, 20, 51, 1),),
+                                    shape: BoxShape.rectangle,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                    color: Color.fromRGBO(14, 20, 51, 1),
+                                  ),
                                   child: Row(
                                     children: [
                                       Expanded(
@@ -98,10 +104,9 @@ class _NewsMainState extends State<NewsMain> {
                                           "${e.title!.trim()}\n",
                                           // softWrap: true,
                                           style: const TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20,
-                                            color: Colors.white
-                                          ),
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20,
+                                              color: Colors.white),
                                         ),
                                       ),
                                       e.imageUrl == null
@@ -125,10 +130,16 @@ class _NewsMainState extends State<NewsMain> {
                     ),
                   );
                 } else {
-                  return const Center(
-                    // Showing a loading indicator while the future hasnt been resolved yet
-                    child: CircularProgressIndicator(),
-                  );
+                  return Center(
+                    child: Column(
+                      children: const [
+                        SizedBox(
+                          height: 300,
+                        ),
+                        CircularProgressIndicator(),
+                      ],
+                    ),
+                  ); // Showing a loading indicator while the future hasnt been resolved yet
                 }
               },
             ),
