@@ -50,6 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Color.fromRGBO(4, 12, 44, 1),
         elevation: 0,
         actions: [
+          Center(child: Text("News")),
           IconButton(
             onPressed: () {
               Navigator.push(
@@ -63,7 +64,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
 
       backgroundColor: Color.fromRGBO(	4, 12, 44,1),
-      body:  SingleChildScrollView(child: FetchScreen(lat: widget.lat, long: widget.long,snapshot: widget.snapshot,)),
+      body:  SingleChildScrollView(child: Container(
+          child: FetchScreen(lat: widget.lat, long: widget.long,snapshot: widget.snapshot,),
+      ),),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromRGBO(14, 20, 51, 1),
 
