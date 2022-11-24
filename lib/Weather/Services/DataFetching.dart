@@ -45,13 +45,13 @@ class _FetchScreenState extends State<FetchScreen> {
             children: [
 
               SizedBox(
-                height: height*0.03,
+                height: height*0.06,
               ),
               Container(
                 alignment: Alignment.center,
 
                 height: height*0.2,
-                margin: EdgeInsets.symmetric(horizontal: width*0.052),
+                margin: EdgeInsets.symmetric(horizontal: width*0.035),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20.0)),
                   color: Color.fromRGBO(14, 20, 51, 1),
