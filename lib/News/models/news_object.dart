@@ -31,6 +31,7 @@ class NewsObject {
         this.language});
 
   NewsObject.fromJson(Map<String, dynamic> json) {
+    // Method which converts JSON to Objects
     title = json['title'];
     link = json['link'];
     keywords = json['keywords'];
@@ -47,6 +48,7 @@ class NewsObject {
   }
 
   Map<String, dynamic> toJson() {
+    // Method which converts Object to JSON
     final Map<String, dynamic> data = <String, dynamic>{};
     data['title'] = title;
     data['link'] = link;
