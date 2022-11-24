@@ -43,18 +43,6 @@ class _FetchScreenState extends State<FetchScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              // Expanded(child: SearchButton()),
-
-            SizedBox(
-              height: height*0.03,
-            ),
-            Image.network('http://openweathermap.org/img/wn/${widget.snapshot!.data!.weather![0].icon}@2x.png'),
-            SizedBox(
-              height: height*0.01,
-            ),
-            Text((((widget.snapshot!.data!.main!.temp)!-273).round().toString())+" °C",style: TextStyle(fontWeight: FontWeight.w400,fontSize: width*0.16),),
-            Text(widget.snapshot!.data!.name.toString(), style: TextStyle(fontSize: width*0.06,color:Colors.grey ),),
-
 
               SizedBox(
                 height: height*0.03,
@@ -100,40 +88,6 @@ class _FetchScreenState extends State<FetchScreen> {
                 ),
               ),
               SizedBox(height: height*0.03,),
-
-
-                          child: Center(
-                              child: Column(
-                                children: [
-                                  SizedBox(
-                                    height: height*0.03,
-                                  ),
-                                  Text(day[(index/3).floor()],
-
-
-                                  style: TextStyle(fontWeight: FontWeight.w900, fontSize: width*0.053,color: Colors.white),
-
-                                  ),
-                                  SizedBox(
-                                    height: height*0.01,
-                                  ),
-                                  Icon(
-                                    Icons.water_drop,
-                                    color: Colors.blue,
-                                    size: height*0.05,
-                                  ),
-                                  SizedBox(
-                                    height: height*0.01,
-                                  ),
-                                  Text(temp[index].round().toString(),
-                                    style: TextStyle(fontWeight: FontWeight.w700, fontSize: width*0.053,color: Colors.white),
-                                  ),
-
-                                ],
-                              )
-                          ),
-
-
               SizedBox(
                 height: height*0.01,
               ),
