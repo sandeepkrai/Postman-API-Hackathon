@@ -18,19 +18,22 @@ class _NewsMainState extends State<NewsMain> {
     final ApiService api = ApiService();
     return Scaffold(
       appBar: AppBar(
+        backgroundColor:  Color.fromRGBO(	4, 12, 44,1),
         title: const Text("News"),
       ),
-      backgroundColor: const Color.fromRGBO(137, 207, 240, 0.2),
+      backgroundColor: Color.fromRGBO(	4, 12, 44,1),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.only(
-                  left: 15.0, right: 15.0, top: 5.0, bottom: 12.0),
+                  left: 15.0, right: 15.0, top: 10.0, bottom: 12.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ElevatedButton(
+              style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Color.fromRGBO(64, 198, 233, 1)),),
                     onPressed: () {
                       if (pageNumber > 0) {
                         setState(() {
@@ -42,6 +45,8 @@ class _NewsMainState extends State<NewsMain> {
                     child: const Text("Previous"),
                   ),
                   ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Color.fromRGBO(64, 198, 233, 1)),),
                     onPressed: () {
                       setState(() {
                         // Changes the page number and hence the api is called for the changed page number
@@ -85,7 +90,7 @@ class _NewsMainState extends State<NewsMain> {
                                       shape: BoxShape.rectangle,
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(10.0)),
-                                      color: Colors.grey),
+                                      color: Color.fromRGBO(14, 20, 51, 1),),
                                   child: Row(
                                     children: [
                                       Expanded(
@@ -95,6 +100,7 @@ class _NewsMainState extends State<NewsMain> {
                                           style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20,
+                                            color: Colors.white
                                           ),
                                         ),
                                       ),
