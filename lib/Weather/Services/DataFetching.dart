@@ -61,11 +61,7 @@ class _FetchScreenState extends State<FetchScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.network('http://openweathermap.org/img/wn/${widget.snapshot!.data!.weather![0].icon}@2x.png'),
-                    Icon(
-                      Icons.water_drop,
-                      color: Colors.blue,
-                      size: height*0.12,
-                    ),
+
 
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
