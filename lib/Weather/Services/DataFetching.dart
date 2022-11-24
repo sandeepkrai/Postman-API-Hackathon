@@ -57,32 +57,40 @@ class _FetchScreenState extends State<FetchScreen> {
                   color: Color.fromRGBO(14, 20, 51, 1),
                 ),
 
-                child: Row(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.network('http://openweathermap.org/img/wn/${widget.snapshot!.data!.weather![0].icon}@2x.png'),
-
-
-                    Column(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(widget.snapshot!.data!.weather![0].main.toString(), style: TextStyle(fontWeight: FontWeight.w800, color: Colors.white, fontSize: width*0.08),),
-                        SizedBox(height: height*0.01,),
-                        Text("${DateFormat.MMMEd().format(DateTime.now())}",style: TextStyle(fontSize: width*0.04,color:Color.fromRGBO(255, 255, 255, 0.8) ), ),
-                        SizedBox(height: height*0.001,),
-                        Text(widget.snapshot!.data!.name.toString(),
-                          style: TextStyle(fontSize: width*0.04,color:Color.fromRGBO(255, 255, 255, 0.8) ),),
+                        Image.network('http://openweathermap.org/img/wn/${widget.snapshot!.data!.weather![0].icon}@2x.png'),
+
+
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(widget.snapshot!.data!.weather![0].main.toString(), style: TextStyle(fontWeight: FontWeight.w800, color: Colors.white, fontSize: width*0.08),),
+                            SizedBox(height: height*0.01,),
+                            Text("${DateFormat.MMMEd().format(DateTime.now())}",style: TextStyle(fontSize: width*0.04,color:Color.fromRGBO(255, 255, 255, 0.8) ), ),
+
+                            SizedBox(height: height*0.001,),
+                            Text(widget.snapshot!.data!.name.toString(),
+                              style: TextStyle(fontSize: width*0.04,color:Color.fromRGBO(255, 255, 255, 0.8) ),),
+                          ],
+                        ),
+                        SizedBox(
+                          width: width*0.07,
+                        ),
+                        Text((((widget.snapshot!.data!.main!.temp)!-273).round().toString())+" °C",
+                          style: TextStyle(fontWeight: FontWeight.w500,fontSize: width*0.11, color: Colors.white),),
+
                       ],
                     ),
-                    SizedBox(
-                      width: width*0.07,
-                    ),
-                    Text((((widget.snapshot!.data!.main!.temp)!-273).round().toString())+" °C",
-                      style: TextStyle(fontWeight: FontWeight.w500,fontSize: width*0.11, color: Colors.white),),
 
                   ],
-                ),
+                )
               ),
               SizedBox(height: height*0.03,),
               SizedBox(
