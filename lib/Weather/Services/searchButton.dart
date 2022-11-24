@@ -91,14 +91,14 @@ class _SearchButtonState extends State<SearchButton> {
                 itemBuilder: (context,index){
                   return ListTile(
                     leading: const Icon(Icons.location_on,
-                      color: Colors.black,),
+                      color: Color.fromRGBO(64, 198, 233, 1),),
                     onTap: () async {
                       List<Location> locations = await locationFromAddress(_placesList[index]['description']);
                       print(locations);
                       Navigator.of(context).push(MaterialPageRoute(builder: (context) => SplashScreen(lat: locations[0].latitude, long: locations[0].longitude,)));
 
                     },
-                    title: Text(_placesList[index]['description'])  ,
+                    title: Text(_placesList[index]['description'], style: TextStyle(color: Color.fromRGBO(64, 198, 233, 1)),)  ,
                   );
                 })),
       ],
