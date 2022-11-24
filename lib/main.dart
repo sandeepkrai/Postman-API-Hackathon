@@ -40,15 +40,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   _initUser(){
-    print("i m here");
   }
   @override
   Widget build(BuildContext context) {
-    print(widget.snapshot);
+    // print(widget.snapshot);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Weather"),
+        title: const Text("Weather"),
         backgroundColor: Color.fromRGBO(4, 12, 44, 1),
+        elevation: 0,
         actions: [
           IconButton(
             onPressed: () {
