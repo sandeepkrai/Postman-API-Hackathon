@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
-        scaffoldBackgroundColor: Color.fromRGBO(255, 255, 255, 0.7)
+        scaffoldBackgroundColor: Color.fromRGBO(64, 198, 233,1)
       ),
       home:  SplashScreen(),
     );
@@ -48,6 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Weather"),
+        backgroundColor: Color.fromRGBO(4, 12, 44, 1),
         actions: [
           IconButton(
             onPressed: () {
@@ -61,14 +62,19 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
 
-      backgroundColor: Color.fromRGBO(	137, 207, 240,1),
+      backgroundColor: Color.fromRGBO(	4, 12, 44,1),
       body:  SingleChildScrollView(child: FetchScreen(lat: widget.lat, long: widget.long,snapshot: widget.snapshot,)),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromRGBO(14, 20, 51, 1),
+
         onPressed: () {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => const Search()));
         },
-        child: const Icon(Icons.search),
+        
+        child: const Icon(Icons.search,
+        color: Color.fromRGBO(64,198,233,1),
+        ),
       ),
     );
   }
