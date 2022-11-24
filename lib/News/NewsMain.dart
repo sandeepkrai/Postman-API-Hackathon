@@ -130,8 +130,15 @@ class _NewsMainState extends State<NewsMain> {
                     ),
                   );
                 } else {
-                  return const Center(
-                    child: CircularProgressIndicator(),
+                  return Center(
+                    child: Column(
+                      children: const [
+                        SizedBox(
+                          height: 300,
+                        ),
+                        CircularProgressIndicator(),
+                      ],
+                    ),
                   ); // Showing a loading indicator while the future hasnt been resolved yet
                 }
               },
