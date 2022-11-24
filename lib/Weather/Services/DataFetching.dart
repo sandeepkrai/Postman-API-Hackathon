@@ -76,7 +76,7 @@ class _FetchScreenState extends State<FetchScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Image.network('http://openweathermap.org/img/wn/${widget.snapshot!.data!.weather![0].icon}@2x.png'),
 
@@ -106,6 +106,9 @@ class _FetchScreenState extends State<FetchScreen> {
                         ),
                         Text((((widget.snapshot!.data!.main!.temp)!-273).round().toString())+" °C",
                           style: TextStyle(fontWeight: FontWeight.w500,fontSize: width*0.11, color: Colors.white),),
+                        SizedBox(
+                          width: width*0.02,
+                        )
 
                       ],
                     ),
