@@ -20,10 +20,20 @@ class FetchScreen extends StatefulWidget {
 class _FetchScreenState extends State<FetchScreen> {
   final day=["Today","Tuesday","Wednesday"];
   final temp= [14.5,28.0,16.0,15.2,35.1,18.4,19.0,42.3,21.3];
+  String getClockInUtcPlus3Hours(int timeSinceEpochInSec) {
+    final time = DateTime.fromMillisecondsSinceEpoch(timeSinceEpochInSec * 1000,
+        isUtc: true)
+        .add(const Duration(hours: 3));
+    return '${time.hour}:${time.second}';
+  }
 
   @override
   Widget build(BuildContext context) {
-    print(widget.snapshot);
+    var time = getClockInUtcPlus3Hours(1669291435);
+    // var hh = time!/(60);
+    print(DateTime.now());
+    // var mm = (time!%(60))/60;
+    print(time);
     var height= MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     TextStyle titlefont= TextStyle(fontWeight: FontWeight.w600, fontSize: width*0.055, color: Colors.white);
@@ -55,6 +65,10 @@ class _FetchScreenState extends State<FetchScreen> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20.0)),
                   color: Color.fromRGBO(14, 20, 51, 1),
+                  image: DecorationImage(
+                      image: AssetImage("assets/images/25503.jpg", ),
+                      opacity: 0.5,
+                      fit: BoxFit.cover),
                 ),
 
                 child: Row(
@@ -143,7 +157,7 @@ class _FetchScreenState extends State<FetchScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("PRESSURE",style: titlefont,),
-                            Text(widget.snapshot!.data!.main!.pressure.toString(), style: infofont,),
+                            Text(widget.snapshot!.data!.main!.pressure.toString()+" hPa", style: infofont,),
                           ],
                         ),
                       ),
@@ -157,7 +171,7 @@ class _FetchScreenState extends State<FetchScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("FEELS LIKE",style: titlefont,),
-                            Text(widget.snapshot!.data!.main!.feelsLike.toString(), style: infofont,),
+                            Text((widget.snapshot!.data!.main!.feelsLike!-273).round().toString()+ " °C", style: infofont,),
                           ],
                         ),
                       )
@@ -180,7 +194,7 @@ class _FetchScreenState extends State<FetchScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("MIN TEMP",style: titlefont,),
-                            Text(widget.snapshot!.data!.main!.tempMin.toString(), style: infofont,)
+                            Text((widget.snapshot!.data!.main!.tempMin!-273).round().toString()+" °C", style: infofont,)
                           ],
                         ),
                       ),
@@ -194,7 +208,7 @@ class _FetchScreenState extends State<FetchScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("MAX TEMP",style: titlefont,),
-                            Text(widget.snapshot!.data!.main!.tempMax.toString(), style: infofont,)
+                            Text((widget.snapshot!.data!.main!.tempMax!-273).round().toString()+" °C", style: infofont,)
                           ],
                         ),
                       )
@@ -217,7 +231,8 @@ class _FetchScreenState extends State<FetchScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("SUNRISE",style: titlefont,),
-                            Text(widget.snapshot!.data!.main!.tempMin.toString(), style: infofont,)
+
+                            Text(getClockInUtcPlus3Hours(widget.snapshot!.data!.sys!.sunrise!.round()).toString(), style: infofont,)
                           ],
                         ),
                       ),
@@ -232,7 +247,7 @@ class _FetchScreenState extends State<FetchScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("SUNSET",style: titlefont,),
-                            Text(widget.snapshot!.data!.main!.tempMax.toString(), style: infofont,)
+                            Text(getClockInUtcPlus3Hours(widget.snapshot!.data!.sys!.sunset!.round()).toString(), style: infofont,)
                           ],
                         ),
                       )
