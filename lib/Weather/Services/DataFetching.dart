@@ -42,12 +42,7 @@ class _FetchScreenState extends State<FetchScreen> {
             SizedBox(
               height: height*0.03,
             ),
-            Icon(
-              Icons.water_drop,
-              color: Colors.blue,
-              size: height*0.1,
-            ),
-
+            Image.network('http://openweathermap.org/img/wn/${widget.snapshot!.data!.weather![0].icon}@2x.png'),
             SizedBox(
               height: height*0.01,
             ),
